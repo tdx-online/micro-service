@@ -3,7 +3,7 @@ server: # 注意冒号后面的空格
 # 服务注册
 spring:
   application:
-    name: eurekaServer # 服务的名称
+    name: eureka-server # 服务的名称
 eureka:
   client:
     service-url: # eureka的地址信息,eureka本身也是个服务，也得注册到自己身上

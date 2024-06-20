@@ -1,4 +1,4 @@
-package com.hitwh.productservice.controller;
+package controller;
 
 
 

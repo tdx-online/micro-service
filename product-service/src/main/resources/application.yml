@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: productService
+    name: product-service
   datasource:
     #    url: jdbc:mysql://localhost:33306/tdx_online_store?serverTimezone=UTC
     #    username: tdx_online_store_user

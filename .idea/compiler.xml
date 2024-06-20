@@ -10,6 +10,7 @@
         <module name="eureka-service" />
         <module name="product-service" />
         <module name="user-service" />
+        <module name="gateway-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,6 +24,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="access-service" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
       <module name="micro-service" options="" />
       <module name="product-service" options="-parameters" />
       <module name="query-service" options="-parameters" />
