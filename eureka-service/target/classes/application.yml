@@ -1,0 +1,10 @@
+server: # 注意冒号后面的空格
+  port: 8079 # 服务端口
+# 服务注册
+spring:
+  application:
+    name: eurekaServer # 服务的名称
+eureka:
+  client:
+    service-url: # eureka的地址信息,eureka本身也是个服务，也得注册到自己身上
+      defaultZone: http://localhost:8079/eureka

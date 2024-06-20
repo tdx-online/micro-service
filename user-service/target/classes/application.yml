@@ -1,0 +1,43 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: userService
+  datasource:
+    #    url: jdbc:mysql://localhost:33306/tdx_online_store?serverTimezone=UTC
+    #    username: tdx_online_store_user
+    #    password: tdx_online_store_password
+    url: jdbc:mysql://112.124.17.76:3306/tdx_online?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: tdx-online-user
+    password: tdx-online-35x
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      idle-timeout: 10000
+      pool-name: HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+      validation-timeout: 5000
+
+  data:
+    redis:
+      host: 112.124.17.76
+      port: 6379
+      password: tdx-online-redis-35x
+mybatis:
+  # 标记需要注入的实体类的包名
+  type-aliases-package: com.hitwh.userservice.entity
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.hitwh: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+eureka:
+  client:
+    service-url: # eureka 的地址信息
+      defaultZone: http://localhost:8079/eureka
+
