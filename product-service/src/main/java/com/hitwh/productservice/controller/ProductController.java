@@ -1,11 +1,12 @@
 package com.hitwh.productservice.controller;
 
 
-import entity.Product;
-import entity.ResultInfo;
+import com.hitwh.productservice.entity.Product;
+import com.hitwh.productservice.entity.ResultInfo;
+import com.hitwh.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import service.ProductService;
+
 
 @CrossOrigin
 @RestController

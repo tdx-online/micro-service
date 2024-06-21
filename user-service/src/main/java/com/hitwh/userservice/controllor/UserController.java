@@ -1,13 +1,12 @@
 package com.hitwh.userservice.controllor;
 
-
 import com.hitwh.userservice.entity.ResultInfo;
 import com.hitwh.userservice.entity.User;
 import com.hitwh.userservice.service.UserService;
+import com.netflix.discovery.shared.Pair;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.netflix.discovery.shared.Pair;
 
 @CrossOrigin
 @RequestMapping("/user")
@@ -33,7 +32,7 @@ public class UserController {
         if (null != existUser.first()) {
             info.setFlag(true);
             info.setData(existUser.first());
-            response.setHeader("Authorization", "Bearer " + existUser.first());
+            response.setHeader("Authorization", "Bearer " + existUser.second());
             response.setHeader("Access-Control-Expose-Headers", "Authorization");
         } else {
             info.setFlag(false);
@@ -111,3 +110,4 @@ public class UserController {
     }
 
 }
+

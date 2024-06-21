@@ -1,16 +1,17 @@
-package service.impl;
+package com.hitwh.productservice.service.impl;
 
 
-import entity.Product;
-import entity.ProductDetails;
-import entity.ProductImage;
-import mapper.CategoryMapper;
-import mapper.CommentMapper;
-import mapper.ProductMapper;
-import mapper.PropertyMapper;
+
+import com.hitwh.productservice.entity.Product;
+import com.hitwh.productservice.entity.ProductDetails;
+import com.hitwh.productservice.entity.ProductImage;
+import com.hitwh.productservice.mapper.CategoryMapper;
+import com.hitwh.productservice.mapper.CommentMapper;
+import com.hitwh.productservice.mapper.ProductMapper;
+import com.hitwh.productservice.mapper.PropertyMapper;
+import com.hitwh.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.ProductService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package entity;
+package com.hitwh.productservice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +14,5 @@ public class User {
     private String email;
     private String address;
     private String blockAddress;
+    private String token;
 }

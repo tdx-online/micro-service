@@ -1,6 +1,7 @@
-package mapper;
+package com.hitwh.productservice.mapper;
 
-import entity.Comment;
+
+import com.hitwh.productservice.entity.Comment;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

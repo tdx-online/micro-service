@@ -31,7 +31,7 @@ public class JWTUtil {
                 .claim("usertype", userType)
                 .subject(username)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 60000)) // 1 minute
+                .expiration(new Date(System.currentTimeMillis() + 3600000)) // 1 hour
                 .signWith(keyPair.getPrivate())
                 .compact();
     }

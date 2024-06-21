@@ -1,13 +1,15 @@
-package service.impl;
+package com.hitwh.productservice.service.impl;
 
 
-import mapper.CategoryMapper;
-import mapper.ProductMapper;
-import mapper.UploadMapper;
+
+import com.hitwh.productservice.mapper.CategoryMapper;
+import com.hitwh.productservice.mapper.ProductMapper;
+import com.hitwh.productservice.mapper.UploadMapper;
+import com.hitwh.productservice.service.UploadService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.UploadService;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;

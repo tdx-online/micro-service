@@ -28,15 +28,15 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // 禁用CSRF保护
                 .authorizeRequests(authorize -> authorize  // 开始权限配置
-                        .requestMatchers("user/register").permitAll()
-                        .requestMatchers("user/login").permitAll()
-                        .requestMatchers("product/details/{id}").permitAll()
-                        .requestMatchers("product/list").permitAll()
-                        .requestMatchers("category/homePageCategory").permitAll()
-                        .requestMatchers("category/listAllCategories").permitAll()
-                        .requestMatchers("category/searchCategoryProperty/{cid}").permitAll()
-                        .anyRequest().authenticated())  // 其他请求都需要认证
-//                .addFilter(new JWTAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate))
+                        .requestMatchers("/user/register").permitAll()
+                        .requestMatchers("/user/login").permitAll()
+                        .requestMatchers("/product/details/{id}").permitAll()
+                        .requestMatchers("/product/list").permitAll()
+                        .requestMatchers("/product/search/{keyword}").permitAll()
+                        .requestMatchers("/category/homePageCategory").permitAll()
+                        .requestMatchers("/category/listAllCategories").permitAll()
+                        .requestMatchers("/category/searchCategoryProperty/{cid}").permitAll()
+                        .anyRequest().permitAll())  // 其他请求都需要认证
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate));
         return http.build();
     }

@@ -25,43 +25,54 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String header = request.getHeader("Authorization");
 
-        if (header == null || !header.startsWith("Bearer ")) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        String token = header.replace("Bearer ", "");
-        String username = JWTUtil.getUsernameFromToken(token);
-
-        if (username == null) {
-            String requestURI = request.getRequestURI();
-            if (requestURI.contains("user/register") ||
-                    requestURI.contains("user/login") ||
-                    requestURI.contains("product/details/{id}") ||
-                    requestURI.contains("product/list") ||
-                    requestURI.contains("category/homePageCategory") ||
-                    requestURI.contains("category/listAllCategories") ||
-                    requestURI.contains("category/searchCategoryProperty/{cid}")) {
-                chain.doFilter(request, response);
-                return;
-            }
-//            System.out.println(requestURI);
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return;
-        }
-
-        if (JWTUtil.validateToken(token)) {
-            try {
-                if (redisTemplate.opsForValue().get(token) != null) {
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
-            } catch (Exception e) {
-                return;
-//                e.printStackTrace();
-            }
-        }
-
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken("", null, new ArrayList<>());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
+
+        return;
+
+//        if (header == null || !header.startsWith("Bearer ")) {
+//            chain.doFilter(request, response);
+//            return;
+//        }
+//
+//        String token = header.replace("Bearer ", "");
+//        String username = JWTUtil.getUsernameFromToken(token);
+////        System.out.println(username);
+//
+//        if (username == null) {
+//            String requestURI = request.getRequestURI();
+//            if (requestURI.contains("user/register") ||
+//                    requestURI.contains("user/login") ||
+//                    requestURI.contains("product/details") ||
+//                    requestURI.contains("product/list") ||
+//                    requestURI.contains("product/search") ||
+//                    requestURI.contains("category/homePageCategory") ||
+//                    requestURI.contains("category/listAllCategories") ||
+//                    requestURI.contains("category/searchCategoryProperty")) {
+//                chain.doFilter(request, response);
+//                return;
+//            }
+////            System.out.println(requestURI);
+//            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+//            return;
+//        }
+//
+//        if (JWTUtil.validateToken(token)) {
+//            try {
+//                User user = (User) redisTemplate.opsForValue().get(username);
+//                if (user != null) {
+//                    if (token.equals(user.getToken())) {
+//                        authentication = new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
+//                        SecurityContextHolder.getContext().setAuthentication(authentication);
+//                    }
+//                }
+//            } catch (Exception e) {
+//                return;
+////                e.printStackTrace();
+//            }
+//        }
+//
+//        chain.doFilter(request, response);
     }
 }

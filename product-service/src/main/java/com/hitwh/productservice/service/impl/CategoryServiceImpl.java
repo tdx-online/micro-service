@@ -1,13 +1,14 @@
-package service.impl;
+package com.hitwh.productservice.service.impl;
 
 
-import entity.Category;
-import entity.ProductDetails;
-import mapper.CategoryMapper;
-import mapper.ProductMapper;
+import com.hitwh.productservice.entity.Category;
+import com.hitwh.productservice.entity.ProductDetails;
+import com.hitwh.productservice.mapper.CategoryMapper;
+import com.hitwh.productservice.mapper.ProductMapper;
+import com.hitwh.productservice.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.CategoryService;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
