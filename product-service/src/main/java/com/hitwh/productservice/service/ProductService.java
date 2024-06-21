@@ -1,8 +1,10 @@
-package service;
+package com.hitwh.productservice.service;
 
 
-import entity.Product;
-import entity.ProductDetails;
+
+
+import com.hitwh.productservice.entity.Product;
+import com.hitwh.productservice.entity.ProductDetails;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package entity;
+package com.hitwh.productservice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

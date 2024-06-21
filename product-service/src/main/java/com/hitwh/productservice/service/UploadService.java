@@ -1,4 +1,4 @@
-package service;
+package com.hitwh.productservice.service;
 
 import java.io.InputStream;
 

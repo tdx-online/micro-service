@@ -3,7 +3,6 @@ package com.hitwh.userservice.controllor;
 import com.hitwh.userservice.entity.Order;
 import com.hitwh.userservice.entity.ResultInfo;
 import com.hitwh.userservice.entity.User;
-import com.hitwh.userservice.mapper.ProductMapper;
 import com.hitwh.userservice.service.OrderService;
 import com.hitwh.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,11 @@ import java.util.Random;
 public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
-    private final ProductMapper productMapper;
 
     @Autowired
-    public OrderController(OrderService orderService, UserService userService, ProductMapper productMapper) {
+    public OrderController(OrderService orderService, UserService userService) {
         this.orderService = orderService;
         this.userService = userService;
-        this.productMapper = productMapper;
     }
 
     @GetMapping("/getAllOrders")
@@ -111,7 +108,7 @@ public class OrderController {
     /**
      * 删除订单
      *
-     * @param oid  订单ID
+     * @param oid 订单ID
      * @return 删除结果
      * @throws IOException IO异常
      */

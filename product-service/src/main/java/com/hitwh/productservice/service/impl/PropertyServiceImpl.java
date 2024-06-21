@@ -1,10 +1,11 @@
-package service.impl;
+package com.hitwh.productservice.service.impl;
 
 
-import mapper.PropertyMapper;
+
+import com.hitwh.productservice.mapper.PropertyMapper;
+import com.hitwh.productservice.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.PropertyService;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {

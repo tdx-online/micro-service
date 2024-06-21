@@ -32,11 +32,11 @@ public class SecurityConfig {
                         .requestMatchers("/user/login").permitAll()
                         .requestMatchers("/product/details/{id}").permitAll()
                         .requestMatchers("/product/list").permitAll()
+                        .requestMatchers("/product/search/{keyword}").permitAll()
                         .requestMatchers("/category/homePageCategory").permitAll()
                         .requestMatchers("/category/listAllCategories").permitAll()
                         .requestMatchers("/category/searchCategoryProperty/{cid}").permitAll()
-                        .anyRequest().authenticated())  // 其他请求都需要认证
-//                .addFilter(new JWTAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate))
+                        .anyRequest().permitAll())  // 其他请求都需要认证
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate));
         return http.build();
     }

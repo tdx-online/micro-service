@@ -1,8 +1,9 @@
-package mapper;
+package com.hitwh.productservice.mapper;
 
 
-import entity.Category;
-import entity.Product;
+
+import com.hitwh.productservice.entity.Category;
+import com.hitwh.productservice.entity.Product;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

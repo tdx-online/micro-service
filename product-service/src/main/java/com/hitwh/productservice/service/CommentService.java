@@ -1,7 +1,7 @@
-package service;
+package com.hitwh.productservice.service;
 
 
-import entity.Comment;
+import com.hitwh.productservice.entity.Comment;
 
 public interface CommentService {
     boolean addComment(Comment comment);

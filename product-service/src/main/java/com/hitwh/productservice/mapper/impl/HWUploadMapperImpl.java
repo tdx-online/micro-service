@@ -1,9 +1,9 @@
-package mapper.impl;
+package com.hitwh.productservice.mapper.impl;
 
+import com.hitwh.productservice.mapper.UploadMapper;
 import com.obs.services.ObsClient;
 import com.obs.services.exception.ObsException;
 import com.obs.services.model.PutObjectResult;
-import mapper.UploadMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 

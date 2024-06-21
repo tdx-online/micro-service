@@ -2,7 +2,7 @@ server:
   port: 8082
 spring:
   application:
-    name: userService
+    name: user-service
   datasource:
     #    url: jdbc:mysql://localhost:33306/tdx_online_store?serverTimezone=UTC
     #    username: tdx_online_store_user
@@ -10,7 +10,7 @@ spring:
     url: jdbc:mysql://112.124.17.76:3306/tdx_online?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: tdx-online-user
     password: tdx-online-35x
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 5
       minimum-idle: 1

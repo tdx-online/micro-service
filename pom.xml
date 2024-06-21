@@ -24,7 +24,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
-		<mysql.version>5.1.47</mysql.version>
 		<mybatis.version>3.0.3</mybatis.version>
 	</properties>
 	<dependencyManagement>
@@ -36,12 +35,6 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<!-- mysql驱动 -->
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>${mysql.version}</version>
 			</dependency>
 			<!--mybatis-->
 			<dependency>

@@ -1,7 +1,7 @@
-package mapper;
+package com.hitwh.productservice.mapper;
 
 
-import entity.ProductProperties;
+import com.hitwh.productservice.entity.ProductProperties;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

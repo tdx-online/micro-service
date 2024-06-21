@@ -1,10 +1,12 @@
-package service.impl;
+package com.hitwh.productservice.service.impl;
 
-import entity.Comment;
-import mapper.CommentMapper;
+
+import com.hitwh.productservice.entity.Comment;
+import com.hitwh.productservice.mapper.CommentMapper;
+import com.hitwh.productservice.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.CommentService;
+
 
 @Service
 public class CommentServiceImpl implements CommentService {

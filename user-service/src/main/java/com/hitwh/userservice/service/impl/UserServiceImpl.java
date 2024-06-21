@@ -1,17 +1,14 @@
 package com.hitwh.userservice.service.impl;
 
-
 import com.hitwh.userservice.config.authentication.JWTUtil;
 import com.hitwh.userservice.entity.User;
 import com.hitwh.userservice.mapper.UserMapper;
 import com.hitwh.userservice.service.UserService;
-
+import com.netflix.discovery.shared.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-
 import org.springframework.stereotype.Service;
 
-import com.netflix.discovery.shared.Pair;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -33,9 +30,8 @@ public class UserServiceImpl implements UserService {
         String token = null;
         if (user != null) {
             token = JWTUtil.generateToken(username, String.valueOf(user.getId()));
-//            System.out.println("token: " + token);
-            redisTemplate.opsForValue().set(token, user, 30, TimeUnit.MINUTES);
-//            System.out.println(redisTemplate.opsForValue().get(token));
+            user.setToken(token);
+            redisTemplate.opsForValue().set(username, user, 1, TimeUnit.HOURS);
         }
 
         return new Pair<>(user, token);
@@ -59,12 +55,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByToken(String token) {
         token = token.replace("Bearer ", "");
-        return (User) redisTemplate.opsForValue().get(token);
+        String username = JWTUtil.getUsernameFromToken(token);
+        if (username == null)
+            return null;
+        User user = (User) redisTemplate.opsForValue().get(username);
+        if (user != null && user.getToken().equals(token))
+            return user;
+        return null;
     }
 
     @Override
     public Boolean logout(String token) {
-        return redisTemplate.delete(token);
+        token = token.replace("Bearer ", "");
+        String username = JWTUtil.getUsernameFromToken(token);
+        if (username == null)
+            return false;
+        return redisTemplate.delete(username);
     }
 
 }
