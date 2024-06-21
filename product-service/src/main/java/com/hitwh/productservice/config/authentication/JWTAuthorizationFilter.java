@@ -1,4 +1,4 @@
-package com.hitwh.userservice.config.authentication;
+package com.hitwh.productservice.config.authentication;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

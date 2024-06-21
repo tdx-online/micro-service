@@ -1,4 +1,4 @@
-package com.hitwh.userservice.config.authentication;
+package com.hitwh.productservice.config.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +36,6 @@ public class SecurityConfig {
                         .requestMatchers("/category/listAllCategories").permitAll()
                         .requestMatchers("/category/searchCategoryProperty/{cid}").permitAll()
                         .anyRequest().authenticated())  // 其他请求都需要认证
-//                .addFilter(new JWTAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate));
         return http.build();
     }

@@ -1,0 +1,102 @@
+networks:
+  tdx-backend:
+    driver: bridge
+
+services:
+  eureka-service:
+    #    image: tdx-backend-eureka:latest
+    build:
+      context: .
+      dockerfile: eureka.Dockerfile
+    container_name: eureka-service
+    environment:
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-service:8079/eureka'
+    ports:
+      - '8079:8079'
+    networks:
+      - tdx-backend
+
+  product-service:
+    #    image: tdx-backend-product:latest
+    build:
+      context: .
+      dockerfile: product.Dockerfile
+    container_name: product-service
+    ports:
+      - '8081:8081'
+    environment:
+      - "SERVER_PORT=8081"
+      - "SPRING_APPLICATION_NAME=productService"
+      - "SPRING_DATASOURCE_URL=jdbc:mysql://112.124.17.76:3306/tdx_online?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false"
+      - "SPRING_DATASOURCE_USERNAME=tdx-online-user"
+      - "SPRING_DATASOURCE_PASSWORD=tdx-online-35x"
+      - "SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver"
+      - "SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE=5"
+      - "SPRING_DATASOURCE_HIKARI_MINIMUM-IDLE=1"
+      - "SPRING_DATASOURCE_HIKARI_IDLE-TIMEOUT=10000"
+      - "SPRING_DATASOURCE_HIKARI_POOL-NAME=HikariCP"
+      - "SPRING_DATASOURCE_HIKARI_MAX-LIFETIME=1800000"
+      - "SPRING_DATASOURCE_HIKARI_CONNECTION-TIMEOUT=30000"
+      - "SPRING_DATASOURCE_HIKARI_CONNECTION-TEST-QUERY=SELECT 1"
+      - "SPRING_DATASOURCE_HIKARI_VALIDATION-TIMEOUT=5000"
+      - "MYBATIS_TYPE-ALIASES-PACKAGE=com.hitwh.productservice.entity"
+      - "MYBATIS_CONFIGURATION_MAP-UNDERSCORE-TO-CAMEL-CASE=true"
+      - "LOGGING_LEVEL_COM.HITWH=debug"
+      - "LOGGING_PATTERN_DATEFORMAT=MM-dd HH:mm:ss:SSS"
+      - "EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://eureka-service:8079/eureka"
+    depends_on:
+      - eureka-service
+    networks:
+      - tdx-backend
+
+  user-service:
+    #    image: tdx-backend-user:latest
+    build:
+      context: .
+      dockerfile: user.Dockerfile
+    container_name: user-service
+    ports:
+      - '8082:8082'
+    environment:
+      - "SERVER_PORT=8082"
+      - "SPRING_APPLICATION_NAME=userService"
+      - "SPRING_DATASOURCE_URL=jdbc:mysql://112.124.17.76:3306/tdx_online?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false"
+      - "SPRING_DATASOURCE_USERNAME=tdx-online-user"
+      - "SPRING_DATASOURCE_PASSWORD=tdx-online-35x"
+      - "SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver"
+      - "SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE=5"
+      - "SPRING_DATASOURCE_HIKARI_MINIMUM-IDLE=1"
+      - "SPRING_DATASOURCE_HIKARI_IDLE-TIMEOUT=10000"
+      - "SPRING_DATASOURCE_HIKARI_POOL-NAME=HikariCP"
+      - "SPRING_DATASOURCE_HIKARI_MAX-LIFETIME=1800000"
+      - "SPRING_DATASOURCE_HIKARI_CONNECTION-TIMEOUT=30000"
+      - "SPRING_DATASOURCE_HIKARI_CONNECTION-TEST-QUERY=SELECT 1"
+      - "SPRING_DATASOURCE_HIKARI_VALIDATION-TIMEOUT=5000"
+      - "SPRING_DATA_REDIS_HOST=112.124.17.76"
+      - "SPRING_DATA_REDIS_PORT=6379"
+      - "SPRING_DATA_REDIS_PASSWORD=tdx-online-redis-35x"
+      - "MYBATIS_TYPE-ALIASES-PACKAGE=com.hitwh.userservice.entity"
+      - "MYBATIS_CONFIGURATION_MAP-UNDERSCORE-TO-CAMEL-CASE=true"
+      - "LOGGING_LEVEL_COM.HITWH=debug"
+      - "LOGGING_PATTERN_DATEFORMAT=MM-dd HH:mm:ss:SSS"
+      - "EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://eureka-service:8079/eureka"
+    depends_on:
+      - eureka-service
+    networks:
+      - tdx-backend
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    container_name: 'nginx'
+    depends_on:
+      - user-service
+      - product-service
+      - eureka-service
+    ports:
+      - '8780:80'
+    volumes:
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+    networks:
+      - tdx-backend
