@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe --file docker-compose.yaml convert
+    kompose.version: 1.33.0 (3ce457399)
+  labels:
+    io.kompose.service: user-service
+  name: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: user-service
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe --file docker-compose.yaml convert
+        kompose.version: 1.33.0 (3ce457399)
+      labels:
+        io.kompose.network/micro-service-tdx-backend: "true"
+        io.kompose.service: user-service
+    spec:
+      containers:
+        - env:
+            - name: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
+              value: http://eureka-service:8079/eureka
+            - name: LOGGING_LEVEL_COM.HITWH
+              value: debug
+            - name: LOGGING_PATTERN_DATEFORMAT
+              value: MM-dd HH:mm:ss:SSS
+            - name: MYBATIS_CONFIGURATION_MAP-UNDERSCORE-TO-CAMEL-CASE
+              value: "true"
+            - name: MYBATIS_TYPE-ALIASES-PACKAGE
+              value: com.hitwh.userservice.entity
+            - name: SERVER_PORT
+              value: "8082"
+            - name: SPRING_APPLICATION_NAME
+              value: user-service
+            - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+              value: com.mysql.cj.jdbc.Driver
+            - name: SPRING_DATASOURCE_HIKARI_CONNECTION-TEST-QUERY
+              value: SELECT 1
+            - name: SPRING_DATASOURCE_HIKARI_CONNECTION-TIMEOUT
+              value: "30000"
+            - name: SPRING_DATASOURCE_HIKARI_IDLE-TIMEOUT
+              value: "10000"
+            - name: SPRING_DATASOURCE_HIKARI_MAX-LIFETIME
+              value: "1800000"
+            - name: SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE
+              value: "5"
+            - name: SPRING_DATASOURCE_HIKARI_MINIMUM-IDLE
+              value: "1"
+            - name: SPRING_DATASOURCE_HIKARI_POOL-NAME
+              value: HikariCP
+            - name: SPRING_DATASOURCE_HIKARI_VALIDATION-TIMEOUT
+              value: "5000"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: tdx-online-35x
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://112.124.17.76:3306/tdx_online?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
+            - name: SPRING_DATASOURCE_USERNAME
+              value: tdx-online-user
+            - name: SPRING_DATA_REDIS_HOST
+              value: 112.124.17.76
+            - name: SPRING_DATA_REDIS_PASSWORD
+              value: tdx-online-redis-35x
+            - name: SPRING_DATA_REDIS_PORT
+              value: "6379"
+          image: user-service
+          name: user-service
+          ports:
+            - containerPort: 8082
+              hostPort: 8082
+              protocol: TCP
+      restartPolicy: Always

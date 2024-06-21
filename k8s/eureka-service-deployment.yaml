@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe --file docker-compose.yaml convert
+    kompose.version: 1.33.0 (3ce457399)
+  labels:
+    io.kompose.service: eureka-service
+  name: eureka-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: eureka-service
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe --file docker-compose.yaml convert
+        kompose.version: 1.33.0 (3ce457399)
+      labels:
+        io.kompose.network/micro-service-tdx-backend: "true"
+        io.kompose.service: eureka-service
+    spec:
+      containers:
+        - env:
+            - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+              value: http://eureka-service:8079/eureka
+          image: eureka-service
+          name: eureka-service
+          ports:
+            - containerPort: 8079
+              hostPort: 8079
+              protocol: TCP
+      restartPolicy: Always

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe --file docker-compose.yaml convert
+    kompose.version: 1.33.0 (3ce457399)
+  labels:
+    io.kompose.service: eureka-service
+  name: eureka-service
+spec:
+  ports:
+    - name: "8079"
+      port: 8079
+      targetPort: 8079
+  selector:
+    io.kompose.service: eureka-service
