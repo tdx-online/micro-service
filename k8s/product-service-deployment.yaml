@@ -61,10 +61,11 @@ spec:
               value: jdbc:mysql://112.124.17.76:3306/tdx_online?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
             - name: SPRING_DATASOURCE_USERNAME
               value: tdx-online-user
-          image: product-service
+          image: tdx-backend-product:latest
+          imagePullPolicy: IfNotPresent
           name: product-service
           ports:
             - containerPort: 8081
-              hostPort: 8081
+#              hostPort: 8081
               protocol: TCP
       restartPolicy: Always

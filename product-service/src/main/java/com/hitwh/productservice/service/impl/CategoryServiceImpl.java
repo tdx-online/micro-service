@@ -30,7 +30,6 @@ public class CategoryServiceImpl implements CategoryService {
     public Object categoryAndProduct() {
         List<Category> categories = categoryMapper.listAllCategories();
         List<Object> categoryAndProduct = new ArrayList<>();
-//        categories.forEach(System.out::println);
         for (Category category : categories) {
             Map<String, Object> categoryMap = new HashMap<>();
             categoryMap.put("cid", category.getId());
@@ -38,7 +37,6 @@ public class CategoryServiceImpl implements CategoryService {
             categoryMap.put("category_image", category.getUrlPath());
 
             List<ProductDetails> products = productMapper.homePageGetProductsByCategoryId(category.getId());
-//            products.forEach(System.out::println);
             products.forEach(product -> product.setImages(productMapper.getImagesByProductId(product.getId())));
             categoryMap.put("products", products);
 

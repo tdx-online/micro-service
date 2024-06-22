@@ -67,10 +67,11 @@ spec:
               value: tdx-online-redis-35x
             - name: SPRING_DATA_REDIS_PORT
               value: "6379"
-          image: user-service
+          image: tdx-backend-user:latest
+          imagePullPolicy: IfNotPresent
           name: user-service
           ports:
             - containerPort: 8082
-              hostPort: 8082
+#              hostPort: 8082
               protocol: TCP
       restartPolicy: Always

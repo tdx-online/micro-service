@@ -24,7 +24,7 @@ spec:
         io.kompose.service: nginx
     spec:
       containers:
-        - image: nginx
+        - image: nginx:latest
           name: nginx
           ports:
             - containerPort: 80
@@ -32,7 +32,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /etc/nginx/nginx.conf
-              name: nginx-tdx-backend-cm0
+              name: nginx-tdx-micro-service-cm0
               subPath: nginx.conf
       restartPolicy: Always
       volumes:
@@ -40,5 +40,5 @@ spec:
             items:
               - key: nginx.conf
                 path: nginx.conf
-            name: nginx-tdx-backend-cm0
-          name: nginx-tdx-backend-cm0
+            name: nginx-tdx-micro-service-cm0
+          name: nginx-tdx-micro-service-cm0

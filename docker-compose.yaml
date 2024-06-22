@@ -4,10 +4,10 @@ networks:
 
 services:
   eureka-service:
-    #    image: tdx-backend-eureka:latest
-    build:
-      context: .
-      dockerfile: eureka.Dockerfile
+    image: tdx-backend-eureka:latest
+    #    build:
+    #      context: .
+    #      dockerfile: eureka.Dockerfile
     container_name: eureka-service
     environment:
       - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-service:8079/eureka'
@@ -17,10 +17,10 @@ services:
       - tdx-backend
 
   user-service:
-    #    image: tdx-backend-user:latest
-    build:
-      context: .
-      dockerfile: user.Dockerfile
+    image: tdx-backend-user:latest
+    #    build:
+    #      context: .
+    #      dockerfile: user.Dockerfile
     container_name: user-service
     ports:
       - '8082:8082'
@@ -53,10 +53,10 @@ services:
       - tdx-backend
 
   product-service:
-    #    image: tdx-backend-product:latest
-    build:
-      context: .
-      dockerfile: product.Dockerfile
+    image: tdx-backend-product:latest
+    #    build:
+    #      context: .
+    #      dockerfile: product.Dockerfile
     container_name: product-service
     ports:
       - '8081:8081'
@@ -87,9 +87,10 @@ services:
       - tdx-backend
 
   nginx:
-    build:
-      context: .
-      dockerfile: nginx.Dockerfile
+#    build:
+#      context: .
+#      dockerfile: nginx.Dockerfile
+    image: nginx:latest
     container_name: 'nginx'
     depends_on:
       - user-service

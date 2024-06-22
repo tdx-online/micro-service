@@ -25,10 +25,11 @@ spec:
         - env:
             - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
               value: http://eureka-service:8079/eureka
-          image: eureka-service
+          image: tdx-backend-eureka:latest
+          imagePullPolicy: IfNotPresent
           name: eureka-service
           ports:
             - containerPort: 8079
-              hostPort: 8079
+#              hostPort: 8079
               protocol: TCP
       restartPolicy: Always
